@@ -46,7 +46,7 @@ public class EnemyIA : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Destroy(this.gameObject);
+            GameManager.GameManagerObject.PlayerKilled();
         }
 
 

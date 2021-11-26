@@ -25,8 +25,7 @@ public class CoinBehab : MonoBehaviour
 
     private void CoinCollected(Collider colOther)
     {
-        Debug.Log("Collision con: " + colOther.gameObject.tag);
-        GameManager.GameManagerObject.IncreaseScore();
+        GameManager.GameManagerObject.CoinCollected();
         Destroy(this.gameObject);
     }
 

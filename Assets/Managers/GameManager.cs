@@ -8,9 +8,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     public int _currentScore = 0;
-
-    int _currentRound;
-    int _recordRound;
+    public int _totalScore = 0;
+    public int _totalCoins = 2;
+    public int _recordScore;
 
     //GamManager Singleton
     static GameManager _instanceGameManager;
@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         //SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    //Score functions
     //Current Score
     public int CurrentScore
     {
@@ -48,58 +49,95 @@ public class GameManager : MonoBehaviour
             return (_currentScore);
         }
     }
+
+    public void IncreaseTotalScore()
+    {
+        ++_totalScore;
+        HubManager.HubManagerObject.PopulateTotalScoreInMainScene();
+    }
     public void IncreaseScore()
     {
-        _currentScore = _currentScore + 1;
-        HubManager.HubManagerObject.UpdateCurrentScore();
-
+        ++_currentScore;                       
+        HubManager.HubManagerObject.PopulateCurrentScore();
+        IncreaseTotalScore();
     }
     public void ResetScore()
     {
-        _currentScore = 0;
+        _currentScore = 0;        
+    }
+    public  void CheckScore()
+    {
+        if (_currentScore == _totalCoins)
+        {
+            HubManager.HubManagerObject._fromMenu = false;
+            StartMainScene();
+        }
+        else return;
+
+    }
+    public void ResetTotalScore()
+    {
+        _totalScore = 0;
     }
 
-    //Current Round
-    public int CurrentRound
+    //Record Functions
+    //Current Record
+    public int CurrentRecord
     {
         set
         {
-            _currentRound = value;
-
+            _recordScore = value;
         }
         get
         {
-            return (_currentRound);
+            return (_recordScore);
         }
     }
-    public void IncreaseRound()
+    public void CheckRecord()
     {
-        _currentRound += _currentRound;
+        if (_totalScore > _recordScore)
+        {
+            _recordScore = _totalScore;
+        }
     }
 
-    //Record Round
-    public int RecordRound
+    //Config StartScene at load;
+    public void StartMainScene()
     {
-        set
+        ResetScore();   
+        if (HubManager.HubManagerObject._fromMenu)
         {
-            _recordRound = value;
-
+            ResetTotalScore();
         }
-        get
-        {
-            return (_recordRound);
-        }
+        HubManager.HubManagerObject.StartMainSceneUI();
+        SceneManager.LoadScene(1);
     }
 
+    public void StartEndScene()
+    {
+        CheckRecord();
+        HubManager.HubManagerObject.StartEndSceneUI();
+        SceneManager.LoadScene(2);       
+    }
+
+    public void StartMenuScene()
+    {
+        ResetScore();
+        ResetTotalScore();
+        HubManager.HubManagerObject.StartMenuSceneUI();
+        SceneManager.LoadScene(0);
+    }  
     
-    // Start is called before the first frame update
-    void Start()
+    public void PlayerKilled()
     {
-        
+        StartEndScene();
     }
 
-    // Update is called once per frame
-    void Update()
-    {        
+    public void CoinCollected()
+    {
+        IncreaseScore();
+        CheckScore();
+
     }
+    
 }
