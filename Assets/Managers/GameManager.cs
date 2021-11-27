@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
         //SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    private void Start()
+    {
+        SaveData.LoadData();
+    }
+
     //Score functions
     //Current Score
     public int CurrentScore
@@ -137,7 +142,18 @@ public class GameManager : MonoBehaviour
     {
         IncreaseScore();
         CheckScore();
-
     }
     
+    public void GameQuit()
+    {
+        SaveData.SaveGameData();
+        Debug.Log("Saved data path: " + SaveData.path);
+        Debug.Log("********GAME QUIT**********");
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
+    }
+
 }

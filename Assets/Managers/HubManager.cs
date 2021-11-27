@@ -119,6 +119,10 @@ public class HubManager : MonoBehaviour
         
     }
 
+    public void OnQuitGameButtonPressed()
+    {
+        GameManager.GameManagerObject.GameQuit();
+    }
     public void StartEndSceneUI()
     {
         SetEndSceneUI();
