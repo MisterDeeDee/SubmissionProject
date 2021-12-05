@@ -6,6 +6,8 @@ using System.IO;
 public static class SaveData 
 {
     public static string path;
+
+
     public static void SaveGameData()
     {
         //String that contains our file path
@@ -13,7 +15,7 @@ public static class SaveData
 
         //Create or save data
         Data dataToSave = new Data();
-        dataToSave.record = GameManager.GameManagerObject._recordScore;
+        dataToSave.record = GameManager.GameManagerObject.recordScore;
 
         string saveFile = JsonUtility.ToJson(dataToSave);
 
@@ -37,7 +39,7 @@ public static class SaveData
             StreamReader reader = new StreamReader(path);
             string file = reader.ReadToEnd();
             Data dataToLoad = JsonUtility.FromJson<Data>(file);
-            GameManager.GameManagerObject._recordScore = dataToLoad.record;
+            GameManager.GameManagerObject.recordScore = dataToLoad.record;
             reader.Close();
         }
         else
@@ -47,8 +49,6 @@ public static class SaveData
     }
 
 }
-
-
 
 public class Data
 {

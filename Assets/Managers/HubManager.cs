@@ -10,18 +10,18 @@ public class HubManager : MonoBehaviour
     static HubManager _instanceHubManager;
 
     //HUB Menu
-    public GameObject _hubMenuGO;
+    public GameObject hubMenuGO;
     //Hub Main Scene
-    public GameObject _hubMainSceneGO;
+    public GameObject hubMainSceneGO;
     //Hub End Scene
-    public GameObject _hubEndSceneGO;
+    public GameObject hubEndSceneGO;
 
-    public Text _UIcurrentScore;
-    public Text _UIMainSceneTotalScore;
-    public Text _UIRecordScore;
-    public Text _UIEndSceneTotalScore;
+    public Text UIcurrentScore;
+    public Text UIMainSceneTotalScore;
+    public Text UIRecordScore;
+    public Text UIEndSceneTotalScore;
 
-    public bool _fromMenu = false;
+    public bool fromMenu = false;
 
     public static HubManager HubManagerObject
     {
@@ -50,62 +50,76 @@ public class HubManager : MonoBehaviour
     //Populate MainScene text fields
     public void PopulateCurrentScore()
     {
-        _UIcurrentScore.text = GameManager.GameManagerObject._currentScore.ToString() + " / " + GameManager.GameManagerObject._totalCoins.ToString();             
+        UIcurrentScore.text = GameManager.GameManagerObject.currentScore.ToString() + " / " + GameManager.GameManagerObject.totalCoins.ToString();             
     }
     public void PopulateTotalScoreInMainScene()
     {
-        _UIMainSceneTotalScore.text = GameManager.GameManagerObject._totalScore.ToString();
+        UIMainSceneTotalScore.text = GameManager.GameManagerObject.totalScore.ToString();
     }
+
     
     //Populate End Scene text fields
     public void PopulateTotalScoreInEndScene()
     {
-        _UIEndSceneTotalScore.text = GameManager.GameManagerObject._totalScore.ToString();
+        UIEndSceneTotalScore.text = GameManager.GameManagerObject.totalScore.ToString();
     }
+
     public void PopulateRecordScore()
     {
-        _UIRecordScore.text = GameManager.GameManagerObject._recordScore.ToString();
+        UIRecordScore.text = GameManager.GameManagerObject.recordScore.ToString();
     }
+
 
     //Change UI Scenes
     public void SetMenuUI()
     {        
-        _hubMainSceneGO.SetActive(false);
-        _hubEndSceneGO.SetActive(false);
-        _hubMenuGO.SetActive(true);
+        hubMainSceneGO.SetActive(false);
+        hubEndSceneGO.SetActive(false);
+        hubMenuGO.SetActive(true);
     }
+    
     public void SetMainSceneUI()
     {
-        _hubMenuGO.SetActive(false);     
-        _hubEndSceneGO.SetActive(false);
-        _hubMainSceneGO.SetActive(true);
+        hubMenuGO.SetActive(false);     
+        hubEndSceneGO.SetActive(false);
+        hubMainSceneGO.SetActive(true);
     }
+    
     public void SetEndSceneUI()
     {
-        _hubMenuGO.SetActive(false);
-        _hubMainSceneGO.SetActive(false);
-        _hubEndSceneGO.SetActive(true);
+        hubMenuGO.SetActive(false);
+        hubMainSceneGO.SetActive(false);
+        hubEndSceneGO.SetActive(true);
 
         PopulateRecordScore();
         PopulateTotalScoreInEndScene();
     }
 
+
     //Events
     public void  OnPlayButtonPressed()
     {
-        _fromMenu = true;
+        fromMenu = true;
         GameManager.GameManagerObject.StartMainScene();              
     }
+    
     public void OnBackToMenuButtonPressed()
     {
         GameManager.GameManagerObject.StartMenuScene();        
     }
+    
     public void OnContinueButtonPressed()
     {
         SetEndSceneUI();
         GameManager.GameManagerObject.StartMenuScene();
     }
 
+    public void OnQuitGameButtonPressed()
+    {
+        GameManager.GameManagerObject.GameQuit();
+    }
+
+    //Scene Starting
     public void StartMenuSceneUI()
     {
         SetMenuUI();       
@@ -117,12 +131,8 @@ public class HubManager : MonoBehaviour
         PopulateCurrentScore();        
         PopulateTotalScoreInMainScene();
         
-    }
+    }    
 
-    public void OnQuitGameButtonPressed()
-    {
-        GameManager.GameManagerObject.GameQuit();
-    }
     public void StartEndSceneUI()
     {
         SetEndSceneUI();

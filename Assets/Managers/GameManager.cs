@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
-{
+{ 
 
     [SerializeField]
-    public int _currentScore = 0;
-    public int _totalScore = 0;
-    public int _totalCoins = 2;
-    public int _recordScore;
+    public int currentScore = 0;
+    public int totalScore = 0;
+    public int totalCoins = 2;
+    public int recordScore;
 
     //GamManager Singleton
     static GameManager _instanceGameManager;
@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
             return _instanceGameManager; 
         }
     }    
+
     void Awake()
     {
         if (_instanceGameManager != null)    
@@ -46,78 +47,86 @@ public class GameManager : MonoBehaviour
     {
         set
         {
-            _currentScore = value;
+            currentScore = value;
 
         }
         get
         {
-            return (_currentScore);
+            return (currentScore);
         }
     }
 
     public void IncreaseTotalScore()
     {
-        ++_totalScore;
+        ++totalScore;
         HubManager.HubManagerObject.PopulateTotalScoreInMainScene();
     }
+    
     public void IncreaseScore()
     {
-        ++_currentScore;                       
+        ++currentScore;                       
         HubManager.HubManagerObject.PopulateCurrentScore();
         IncreaseTotalScore();
     }
+    
     public void ResetScore()
     {
-        _currentScore = 0;        
+        currentScore = 0;        
     }
+    
     public  void CheckScore()
     {
-        if (_currentScore == _totalCoins)
+        if (currentScore == totalCoins)
         {
-            HubManager.HubManagerObject._fromMenu = false;
+            HubManager.HubManagerObject.fromMenu = false;
             StartMainScene();
         }
         else return;
 
     }
+    
     public void ResetTotalScore()
     {
-        _totalScore = 0;
+        totalScore = 0;
     }
 
     //Record Functions
     //Current Record
+    
     public int CurrentRecord
     {
         set
         {
-            _recordScore = value;
+            recordScore = value;
         }
         get
         {
-            return (_recordScore);
+            return (recordScore);
         }
     }
+    
     public void CheckRecord()
     {
-        if (_totalScore > _recordScore)
+        if (totalScore > recordScore)
         {
-            _recordScore = _totalScore;
+            recordScore = totalScore;
         }
     }
 
+    
     //Config StartScene at load;
+    //...
     public void StartMainScene()
     {
         ResetScore();   
-        if (HubManager.HubManagerObject._fromMenu)
+        if (HubManager.HubManagerObject.fromMenu)
         {
             ResetTotalScore();
         }
         HubManager.HubManagerObject.StartMainSceneUI();
         SceneManager.LoadScene(1);
     }
-
+        
     public void StartEndScene()
     {
         CheckRecord();
@@ -132,7 +141,10 @@ public class GameManager : MonoBehaviour
         HubManager.HubManagerObject.StartMenuSceneUI();
         SceneManager.LoadScene(0);
     }  
+
     
+    //Game Events    
+    //
     public void PlayerKilled()
     {
         StartEndScene();

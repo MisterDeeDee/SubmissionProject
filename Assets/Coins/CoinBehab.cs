@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinBehab : MonoBehaviour
+public class CoinBehab : Behabs
 {
-
     public float RotationSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +15,7 @@ public class CoinBehab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotateCoin();
+        RotateCoin();        
     }
 
     private void RotateCoin()
@@ -23,19 +23,13 @@ public class CoinBehab : MonoBehaviour
         transform.Rotate(Vector3.left * (RotationSpeed * Time.deltaTime));
     }
 
-    private void CoinCollected(Collider colOther)
+    
+    public override void Collected()
     {
         GameManager.GameManagerObject.CoinCollected();
         Destroy(this.gameObject);
+        base.Collected();
     }
 
-    private void OnTriggerEnter(Collider colOther)
-    {       
-
-        if (colOther.gameObject.tag == "Player")
-        {
-            CoinCollected(colOther);
-            
-        }
-    }
+    
 }

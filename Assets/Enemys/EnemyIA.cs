@@ -8,7 +8,7 @@ public class EnemyIA : MonoBehaviour
 {
     public Transform target;
     NavMeshAgent agent;
-    public float _distance;
+    public float distance;
     public float DistanceToFollow;
     private Vector3 Origin;
 
@@ -20,11 +20,10 @@ public class EnemyIA : MonoBehaviour
         Origin = this.transform.position;
     }
 
-
     void Update()
     {
-        _distance = CalculateDistanceTarget(this.transform.position, target.position);
-        if (_distance < DistanceToFollow)
+        distance = CalculateDistanceTarget(this.transform.position, target.position);
+        if (distance < DistanceToFollow)
         {
             agent.destination = target.position;
         }
@@ -37,11 +36,12 @@ public class EnemyIA : MonoBehaviour
 
     float CalculateDistanceTarget(Vector3 Origen, Vector3 Target)
     {
-        Vector3 _vDistancia;
-        _vDistancia = (Target - Origen);
-        _distance = _vDistancia.magnitude;
-        return (_distance);
+        Vector3 vDistancia;
+        vDistancia = (Target - Origen);
+        distance = vDistancia.magnitude;
+        return (distance);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
