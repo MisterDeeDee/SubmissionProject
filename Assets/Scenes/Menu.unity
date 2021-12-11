@@ -255,9 +255,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1659520103, guid: 5eafc75a68db2264a879e1b0da597725, type: 3}
       propertyPath: m_Text
-      value: Collect all the coins before the enemy catch you.. Dont get caught by
-        the killer capsule. Every Round the enemy is faster. How many rounds can
-        you do?.
+      value: "Collect all the coins before the enemy catch you.\nDont get caught
+        by the killer capsule. Every Round the enemy is faster. \nHow many rounds
+        can you do?."
       objectReference: {fileID: 0}
     - target: {fileID: 462269553538679715, guid: 5eafc75a68db2264a879e1b0da597725, type: 3}
       propertyPath: m_RootOrder
