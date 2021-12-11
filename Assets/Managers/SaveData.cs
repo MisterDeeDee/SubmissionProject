@@ -34,12 +34,16 @@ public static class SaveData
     public static void LoadData()
     {
         path = Application.persistentDataPath + "/savedata.json";
+        Debug.Log("Save data:" + path);
         if(File.Exists(path))
         {
             StreamReader reader = new StreamReader(path);
             string file = reader.ReadToEnd();
             Data dataToLoad = JsonUtility.FromJson<Data>(file);
-            GameManager.GameManagerObject.recordScore = dataToLoad.record;
+            if (dataToLoad != null)
+            {
+                GameManager.GameManagerObject.recordScore = dataToLoad.record;
+            }
             reader.Close();
         }
         else

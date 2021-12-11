@@ -17,7 +17,13 @@ public class EnemyIA : MonoBehaviour
     {
         // Cache agent component and destination
         agent = GetComponent<NavMeshAgent>();
+        StartEnemy();
+    }
+
+    public void StartEnemy()
+    {
         Origin = this.transform.position;
+        agent.speed = GameManager.GameManagerObject.enemySpeed;
     }
 
     void Update()

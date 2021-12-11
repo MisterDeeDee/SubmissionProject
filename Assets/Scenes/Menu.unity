@@ -466,6 +466,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 9158358121484926878, guid: ae2c81e934b6d9744a1c0d5065a156b5, type: 3}
+      propertyPath: enemySpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158358121484926878, guid: ae2c81e934b6d9744a1c0d5065a156b5, type: 3}
+      propertyPath: incrementEnemySpeed
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae2c81e934b6d9744a1c0d5065a156b5, type: 3}
 --- !u!114 &1956628999 stripped

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public int currentScore = 0;
     public int totalScore = 0;
     public int totalCoins = 2;
+    public int enemySpeed = 4;
+    public int incrementEnemySpeed = 1;
     public int recordScore;
 
     //GamManager Singleton
@@ -90,6 +92,11 @@ public class GameManager : MonoBehaviour
         totalScore = 0;
     }
 
+    public void IncreaseEnemySpeed()
+    {
+        enemySpeed = enemySpeed + incrementEnemySpeed;
+    }
+
     //Record Functions
     //Current Record
     
@@ -122,9 +129,13 @@ public class GameManager : MonoBehaviour
         if (HubManager.HubManagerObject.fromMenu)
         {
             ResetTotalScore();
+            enemySpeed = 4;
         }
         HubManager.HubManagerObject.StartMainSceneUI();
+        GameManager.GameManagerObject.IncreaseEnemySpeed();
         SceneManager.LoadScene(1);
+
+       
     }
         
     public void StartEndScene()
