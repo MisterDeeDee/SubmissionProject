@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// INHERITANCE
 public class CoinBehab : Behabs
 {
     public float RotationSpeed;
@@ -23,7 +24,7 @@ public class CoinBehab : Behabs
         transform.Rotate(Vector3.left * (RotationSpeed * Time.deltaTime));
     }
 
-    
+    // POLYMORPHISM
     public override void Collected()
     {
         GameManager.GameManagerObject.CoinCollected();

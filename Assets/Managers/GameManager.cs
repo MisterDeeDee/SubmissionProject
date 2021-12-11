@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
 
     //Score functions
     //Current Score
+
+    // ENCAPSULATION
     public int CurrentScore
     {
         set
@@ -57,7 +59,7 @@ public class GameManager : MonoBehaviour
             return (currentScore);
         }
     }
-
+    // ABSTRACTION
     public void IncreaseTotalScore()
     {
         ++totalScore;
